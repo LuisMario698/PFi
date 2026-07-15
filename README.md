@@ -1,33 +1,53 @@
 # PFi - Aplicación de Finanzas Personales
 
 ## Contexto del Proyecto
-PFi es una aplicación Progressive Web App (PWA) de finanzas personales, alojada en Vercel y conectada a Supabase. Se caracteriza por un diseño hiper-premium, moderno (con *glassmorphism*, micro-animaciones, colores oscuros/vibrantes) y un enfoque didáctico para asegurar que sea completamente entendible por cualquier usuario.
+PFi es una Progressive Web App (PWA) de finanzas personales mobile-first, alojada en Vercel y conectada a Supabase. Diseñada para ser completamente funcional, sin complicaciones y fácil de usar.
 
 ### Stack Tecnológico
-- **Frontend:** Next.js (App Router), React 19.
-- **Estilos:** Vanilla CSS (para máximo control sobre la estética y animaciones premium).
-- **Backend & Auth:** Supabase (Autenticación y Base de Datos).
-- **PWA:** Capacidades de instalación nativa a través de `manifest.ts` y Service Workers.
-- **Despliegue:** Vercel.
+- **Frontend:** Next.js 16 (App Router), React 19, TypeScript
+- **Estilos:** Vanilla CSS (glassmorphism, dark mode, mobile-first 480px max)
+- **Backend & Auth:** Supabase (Auth + PostgreSQL + RLS)
+- **PWA:** `@ducanh2912/next-pwa` + `manifest.ts`
+- **Despliegue:** Vercel
 
-## Decisiones Técnicas y Estado (Sprint Actual)
-- **Sprint 2 (Base de Datos):** Hemos estructurado exitosamente el modelo de base de datos en Supabase.
-  - Tablas Core: `profiles`, `accounts`, `categories`, `transactions` y `goals`.
-  - Seguridad Habilitada: Se han añadido políticas de **Row Level Security (RLS)** que protegen cada tabla vinculándola con `auth.uid()`. Se ha configurado un trigger para la generación automática de los `profiles` tras cada nuevo registro en `auth.users`.
-  - Tipado Estricto: Los tipos de TypeScript han sido autogenerados directamente desde Supabase en `src/types/database.types.ts` y vinculados a los clientes de navegador y servidor de `@supabase/ssr`.
-- **Estética:** Glassmorphism con un modo oscuro por defecto (Vanilla CSS).
-- **ORM:** Nos conectaremos mediante el cliente `@supabase/supabase-js` para mantener un proyecto ligero y reactivo, maximizando el uso de las APIs tipo REST generadas por Supabase.
+## Estructura de Rutas
+```
+/                → Landing (redirige a /dashboard si hay sesión)
+/login           → Login / Registro (toggle entre ambos modos)
+/dashboard       → Balance total, ingresos/gastos del mes, últimas transacciones
+/add             → Agregar ingreso o gasto (seleccionar cuenta, categoría, monto)
+/accounts        → CRUD de cuentas financieras (banco, efectivo, crédito)
+/categories      → CRUD de categorías de ingresos y gastos
+/goals           → Metas de ahorro con barras de progreso
+/profile         → Info del usuario + cerrar sesión
+```
 
-## Guía de Verificación y Comandos
-Para levantar el entorno local:
+## Base de Datos (Supabase)
+### Tablas
+- `profiles` — Extende `auth.users` (trigger automático al registrarse)
+- `accounts` — Cuentas financieras (bank, cash, credit) con balance
+- `categories` — Categorías de ingreso/gasto (seed automático al registrarse)
+- `transactions` — Movimientos vinculados a cuenta + categoría
+- `goals` — Metas de ahorro con monto objetivo y progreso
+
+### Seguridad
+- **RLS habilitado** en todas las tablas
+- Políticas: cada usuario solo puede ver/editar sus propios datos (`auth.uid() = user_id`)
+- Trigger `handle_new_user` → crea perfil automáticamente
+- Trigger `seed_default_categories` → crea 11 categorías predefinidas
+
+## Arquitectura
+- **Middleware** (`src/middleware.ts`) — Refresca tokens de auth en cada request
+- **Server Actions** (`src/app/(app)/actions.ts`) — CRUD centralizado para accounts, categories, transactions, goals
+- **Route Group `(app)`** — Layout autenticado con guard + BottomNav
+- **Tipos generados** (`src/types/database.types.ts`) — Autocompletado 100% estricto
+
+## Comandos
 ```bash
 pnpm install
-pnpm dev
-```
-Para verificar la compilación:
-```bash
-pnpm build
-pnpm lint
+pnpm dev          # Desarrollo local
+pnpm build        # Build de producción
+pnpm lint         # Linting
 ```
 
-*Este archivo README es un documento vivo y se actualizará a lo largo del desarrollo para reflejar los cambios, estructura de datos y próximos pasos.*
+*Este archivo se actualiza conforme avanza el desarrollo.*

@@ -34,9 +34,11 @@ export default function RootLayout({
       <head>
       </head>
       <body>
-        <main className="container animate-fade-in-up" style={{ padding: '40px 24px' }}>
-          {children}
-        </main>
+        <div className="mobile-wrapper">
+          <main className="container animate-fade-in-up">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
