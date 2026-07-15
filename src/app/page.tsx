@@ -1,4 +1,5 @@
 import { Wallet, TrendingUp, PieChart, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -10,9 +11,9 @@ export default function Home() {
           gastos y metas. Toma el control de tu futuro hoy mismo.
         </p>
         <div style={{ marginTop: "2rem" }}>
-          <button className="btn-primary" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}>
+          <Link href="/login" className="btn-primary" style={{ display: "inline-flex", alignItems: "center", gap: "8px", textDecoration: "none" }}>
             Comenzar Ahora <ArrowRight size={18} />
-          </button>
+          </Link>
         </div>
       </header>
 

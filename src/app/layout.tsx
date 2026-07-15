@@ -32,7 +32,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link rel="apple-touch-icon" href="/icon-192x192.png" />
       </head>
       <body>
         <main className="container animate-fade-in-up" style={{ padding: '40px 24px' }}>

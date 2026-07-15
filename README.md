@@ -11,9 +11,12 @@ PFi es una aplicación Progressive Web App (PWA) de finanzas personales, alojada
 - **Despliegue:** Vercel.
 
 ## Decisiones Técnicas y Estado (Sprint Actual)
-- **Sprint Inicial:** Configuración del esqueleto PWA, integración de Supabase client y base del sistema de diseño (tokens de Vanilla CSS).
-- **Estética:** Glassmorphism con un modo oscuro por defecto.
-- **ORM:** Por el momento conectaremos mediante el cliente `@supabase/supabase-js`.
+- **Sprint 2 (Base de Datos):** Hemos estructurado exitosamente el modelo de base de datos en Supabase.
+  - Tablas Core: `profiles`, `accounts`, `categories`, `transactions` y `goals`.
+  - Seguridad Habilitada: Se han añadido políticas de **Row Level Security (RLS)** que protegen cada tabla vinculándola con `auth.uid()`. Se ha configurado un trigger para la generación automática de los `profiles` tras cada nuevo registro en `auth.users`.
+  - Tipado Estricto: Los tipos de TypeScript han sido autogenerados directamente desde Supabase en `src/types/database.types.ts` y vinculados a los clientes de navegador y servidor de `@supabase/ssr`.
+- **Estética:** Glassmorphism con un modo oscuro por defecto (Vanilla CSS).
+- **ORM:** Nos conectaremos mediante el cliente `@supabase/supabase-js` para mantener un proyecto ligero y reactivo, maximizando el uso de las APIs tipo REST generadas por Supabase.
 
 ## Guía de Verificación y Comandos
 Para levantar el entorno local:

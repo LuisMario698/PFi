@@ -1,8 +1,8 @@
 import { createBrowserClient } from '@supabase/ssr'
+import { Database } from '@/types/database.types'
 
 export function createClient() {
-  // Las variables de entorno estarán en .env.local
-  return createBrowserClient(
+  return createBrowserClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
