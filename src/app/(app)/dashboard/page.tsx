@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
-import { ArrowUpRight, ArrowDownRight, Wallet } from 'lucide-react'
+import { ArrowUpRight, ArrowDownRight, Wallet, Trash2 } from 'lucide-react'
 import Link from 'next/link'
+import { deleteTransaction } from '../actions'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -118,13 +119,21 @@ export default async function DashboardPage() {
                       </p>
                     </div>
                   </div>
-                  <p style={{
-                    fontWeight: 600,
-                    fontSize: '0.9rem',
-                    color: tx.type === 'income' ? '#4ade80' : '#f87171'
-                  }}>
-                    {tx.type === 'income' ? '+' : '-'}${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                  </p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <p style={{
+                      fontWeight: 600,
+                      fontSize: '0.9rem',
+                      color: tx.type === 'income' ? '#4ade80' : '#f87171'
+                    }}>
+                      {tx.type === 'income' ? '+' : '-'}${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                    </p>
+                    <form action={deleteTransaction}>
+                      <input type="hidden" name="id" value={tx.id} />
+                      <button type="submit" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', padding: '4px', display: 'flex' }}>
+                        <Trash2 size={14} />
+                      </button>
+                    </form>
+                  </div>
                 </div>
               )
             })}

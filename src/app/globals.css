@@ -122,7 +122,8 @@ p {
   width: 100%;
   max-width: 480px; /* Tamaño máximo para sentirse como un teléfono incluso en desktop */
   margin: 0 auto;
-  padding: 20px 16px 80px 16px; /* Padding inferior extra para la barra de navegación móvil */
+  /* Top padding for Dynamic Island/Notch. Bottom padding for the safe area + bottom nav height */
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 16px calc(80px + env(safe-area-inset-bottom, 24px)) 16px; 
   position: relative;
   display: flex;
   flex-direction: column;
