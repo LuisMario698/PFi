@@ -36,7 +36,7 @@ export default function RootLayout({
       </head>
       <body>
         <div className="mobile-wrapper">
-          <main className="container animate-fade-in-up">
+          <main className="container">
             {children}
           </main>
         </div>

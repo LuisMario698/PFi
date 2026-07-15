@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { LogOut, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
+import { EditProfileName } from './EditProfileName'
 
 export default async function ProfilePage() {
   const supabase = await createClient()
@@ -27,8 +28,8 @@ export default async function ProfilePage() {
           {initial}
         </div>
         <div>
-          <p style={{ fontWeight: 600, fontSize: '1rem' }}>{displayName}</p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{email}</p>
+          <EditProfileName initialName={displayName} />
+          <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginTop: '2px' }}>{email}</p>
         </div>
       </div>
 

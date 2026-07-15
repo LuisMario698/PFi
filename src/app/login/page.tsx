@@ -35,7 +35,7 @@ function LoginForm({ mode, setMode }: { mode: 'login' | 'signup', setMode: (m: '
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}>
+    <div className="animate-fade-in-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}>
       <div className="glass-card" style={{ width: '100%', maxWidth: '400px' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '8px' }}>
           {mode === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta'}

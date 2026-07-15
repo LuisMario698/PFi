@@ -12,7 +12,7 @@ export default async function Home() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', textAlign: 'center', gap: '2rem' }}>
+    <div className="animate-fade-in-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', textAlign: 'center', gap: '2rem' }}>
       <div>
         <h1>PFi</h1>
         <p style={{ fontSize: '1.1rem', maxWidth: '340px', margin: '0 auto' }}>

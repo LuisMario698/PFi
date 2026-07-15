@@ -241,3 +241,22 @@ export async function deleteGoal(formData: FormData) {
   revalidatePath('/goals')
   redirect('/goals')
 }
+
+// ─── PROFILE ────────────────────────────────────────────────
+
+export async function updateProfileName(newName: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect('/login')
+
+  const { error } = await supabase.auth.updateUser({
+    data: { full_name: newName }
+  })
+
+  if (error) {
+    throw new Error('No se pudo actualizar el nombre')
+  }
+
+  revalidatePath('/profile')
+  revalidatePath('/')
+}
