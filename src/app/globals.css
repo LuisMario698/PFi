@@ -23,6 +23,8 @@ html, body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   background-color: var(--background); /* Force notch color */
+  -webkit-overflow-scrolling: touch; /* Habilitar scroll suave con inercia en iOS */
+  overflow-y: auto;
 }
 
 ::-webkit-scrollbar {
@@ -35,7 +37,7 @@ body {
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
+  min-height: 100dvh;
   /* Premium radial gradient background */
   background-image: 
     radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
@@ -129,7 +131,7 @@ p {
   display: flex;
   justify-content: center;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .container {
@@ -159,7 +161,7 @@ p {
   justify-content: space-around;
   align-items: center;
   padding: 12px 16px;
-  padding-bottom: env(safe-area-inset-bottom, 24px); /* Soporte nativo para el notch de iPhone */
+  padding-bottom: max(16px, env(safe-area-inset-bottom, 24px)); /* Asegurar un mínimo de 16px si el env es 0 */
   z-index: 50;
   border-radius: 24px 24px 0 0;
 }
