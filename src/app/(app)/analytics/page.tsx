@@ -153,11 +153,13 @@ export default function AnalyticsPage() {
               key={f}
               onClick={() => setFilter(f)}
               style={{
-                flex: 1, padding: '8px 2px', border: 'none', background: isActive ? 'var(--card-bg)' : 'transparent',
+                flex: 1, padding: '8px 0px', border: 'none', background: isActive ? 'var(--card-bg)' : 'transparent',
                 color: isActive ? 'var(--foreground)' : 'var(--muted)', borderRadius: '8px', cursor: 'pointer',
-                fontSize: '0.8rem', fontWeight: isActive ? 600 : 400,
+                fontSize: '0.75rem', fontWeight: isActive ? 600 : 400,
                 boxShadow: isActive ? '0 2px 8px rgba(0,0,0,0.2)' : 'none',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.2s ease',
+                userSelect: 'none',
+                WebkitUserSelect: 'none'
               }}
             >
               {labels[f]}

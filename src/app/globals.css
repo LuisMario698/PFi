@@ -15,6 +15,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide scrollbars completely to feel like a native app */
+html, body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  background-color: var(--background); /* Force notch color */
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -97,6 +109,8 @@ p {
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
   transition: all 0.2s ease;
   box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
 }
@@ -133,6 +147,8 @@ p {
 .bottom-nav {
   position: fixed;
   bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   max-width: 480px;
   background: rgba(24, 24, 27, 0.85);
@@ -157,6 +173,8 @@ p {
   font-size: 0.75rem;
   font-weight: 500;
   transition: color 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .nav-item.active {
