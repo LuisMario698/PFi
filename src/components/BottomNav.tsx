@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlusCircle, Target, User, LayoutGrid } from "lucide-react";
+import { Home, PlusCircle, Target, User, PieChart } from "lucide-react";
 
 export function BottomNav() {
   const pathname = usePathname();
@@ -14,9 +14,9 @@ export function BottomNav() {
         <span>Inicio</span>
       </Link>
 
-      <Link href="/categories" className={`nav-item ${pathname === "/categories" ? "active" : ""}`}>
-        <LayoutGrid size={22} />
-        <span>Categorías</span>
+      <Link href="/analytics" className={`nav-item ${pathname === "/analytics" ? "active" : ""}`}>
+        <PieChart size={22} />
+        <span>Reportes</span>
       </Link>
 
       <Link href="/add" className="nav-item">
