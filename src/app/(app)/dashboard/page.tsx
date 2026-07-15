@@ -7,25 +7,29 @@ export default async function DashboardPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Fetch real accounts
-  const { data: accounts } = await supabase
-    .from('accounts')
-    .select('*')
-    .eq('user_id', user!.id)
-    .order('created_at', { ascending: true })
-
-  // Fetch transactions for current month
   const now = new Date()
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
   const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59).toISOString()
 
-  const { data: transactions } = await supabase
-    .from('transactions')
-    .select('*, categories(name, color)')
-    .eq('user_id', user!.id)
-    .gte('date', startOfMonth)
-    .lte('date', endOfMonth)
-    .order('date', { ascending: false })
+  // Fetch accounts and transactions in parallel
+  const [
+    { data: accounts },
+    { data: transactions }
+  ] = await Promise.all([
+    supabase
+      .from('accounts')
+      .select('*')
+      .eq('user_id', user!.id)
+      .order('created_at', { ascending: true }),
+    
+    supabase
+      .from('transactions')
+      .select('*, categories(name, color)')
+      .eq('user_id', user!.id)
+      .gte('date', startOfMonth)
+      .lte('date', endOfMonth)
+      .order('date', { ascending: false })
+  ])
 
   // Calculate totals
   const totalBalance = (accounts || []).reduce((sum, a) => sum + a.balance, 0)

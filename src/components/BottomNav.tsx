@@ -9,17 +9,17 @@ export function BottomNav() {
 
   return (
     <nav className="bottom-nav">
-      <Link href="/dashboard" className={`nav-item ${pathname === "/dashboard" ? "active" : ""}`}>
+      <Link href="/dashboard" prefetch={true} className={`nav-item ${pathname === "/dashboard" ? "active" : ""}`}>
         <Home size={22} />
         <span>Inicio</span>
       </Link>
 
-      <Link href="/analytics" className={`nav-item ${pathname === "/analytics" ? "active" : ""}`}>
+      <Link href="/analytics" prefetch={true} className={`nav-item ${pathname === "/analytics" ? "active" : ""}`}>
         <PieChart size={22} />
         <span>Reportes</span>
       </Link>
 
-      <Link href="/add" className="nav-item">
+      <Link href="/add" prefetch={true} className="nav-item">
         <div style={{
           background: "linear-gradient(135deg, var(--primary), #60a5fa)",
           borderRadius: "50%",
@@ -32,12 +32,12 @@ export function BottomNav() {
         </div>
       </Link>
 
-      <Link href="/goals" className={`nav-item ${pathname === "/goals" ? "active" : ""}`}>
+      <Link href="/goals" prefetch={true} className={`nav-item ${pathname === "/goals" ? "active" : ""}`}>
         <Target size={22} />
         <span>Metas</span>
       </Link>
 
-      <Link href="/profile" className={`nav-item ${pathname === "/profile" ? "active" : ""}`}>
+      <Link href="/profile" prefetch={true} className={`nav-item ${pathname === "/profile" ? "active" : ""}`}>
         <User size={22} />
         <span>Perfil</span>
       </Link>

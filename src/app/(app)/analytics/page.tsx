@@ -157,7 +157,7 @@ export default function AnalyticsPage() {
                 color: isActive ? 'var(--foreground)' : 'var(--muted)', borderRadius: '8px', cursor: 'pointer',
                 fontSize: '0.75rem', fontWeight: isActive ? 600 : 400,
                 boxShadow: isActive ? '0 2px 8px rgba(0,0,0,0.2)' : 'none',
-                transition: 'all 0.2s ease',
+                transition: 'background 0.2s ease, color 0.2s ease, font-weight 0.2s ease, box-shadow 0.2s ease',
                 userSelect: 'none',
                 WebkitUserSelect: 'none'
               }}
